@@ -24,7 +24,7 @@ export default function Home() {
         <div className={styles.imageWrap}>
           <Image
             className={styles.myImg}
-            src="../public/coder.jfif"
+            src="/project1/public/coder.jfif"
             alt="coder image"
             width={300}
             height={200}
