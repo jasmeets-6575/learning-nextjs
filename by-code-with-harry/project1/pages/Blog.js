@@ -19,23 +19,18 @@ const blog = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <div>
-          <Link href={"/blogpost/learn-javascript"}>
-            <h3 className={styles.blogItemh3}>
-              How to Learn JavaScript in 2022
-            </h3>
-          </Link>
-          <p>Js is the lang used to design the logic for web</p>
-        </div>
-
-        <div>
-          <h3 className={styles.blogItemh3}>How to Learn JavaScript in 2022</h3>
-          <p>Js is the lang used to design the logic for web</p>
-        </div>
-        <div>
-          <h3 className={styles.blogItemh3}>How to Learn JavaScript in 2022</h3>
-          <p>Js is the lang used to design the logic for web</p>
-        </div>
+        {blogs.map((blog, index) => {
+          return (
+            <div key={index}>
+              <Link href={`/blogpost/${blog.slug}`}>
+                <h3 className={styles.blogItemh3}>{blog.title}</h3>
+              </Link>
+              <p className={styles.blogItemP}>
+                {blog.content.substr(0, 200)}...
+              </p>
+            </div>
+          );
+        })}
       </main>
     </div>
   );

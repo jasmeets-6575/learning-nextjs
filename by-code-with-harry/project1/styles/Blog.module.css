@@ -13,3 +13,7 @@
 .blogItemh3 {
   cursor: pointer;
 }
+.blogItemP {
+  width: 90%;
+  max-width: 720px;
+}

@@ -1,5 +1,6 @@
 {
   "title": "How to learn Nextjs",
   "content": "Next.js has gained substantial popularity as a React framework for building server-rendered and statically generated web applications. Whether you're a React developer looking to enhance your skills or a newcomer to web development, this guide offers a comprehensive approach to learning and mastering Next.js. 1. Grasping the Basics Start your journey by understanding the core concepts of Next.js: Begin with React Fundamentals: If you're not already familiar with React, start by getting comfortable with its fundamental concepts, such as components, props, state, and JSX. Server-Side Rendering (SSR) vs. Static Site Generation (SSG): Gain clarity on the key features of Next.js, particularly its ability to render pages either on the server side or statically during build time. Understand when to use SSR and SSG for optimal performance and SEO benefits.",
-  "author": "Andrew Sir"
+  "author": "Andrew Sir",
+  "slug": "howToLearnNextjs"
 }
