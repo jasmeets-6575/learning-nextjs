@@ -10,6 +10,14 @@
   justify-content: flex-start;
   align-items: center;
 }
+
 .blogItemh3 {
   cursor: pointer;
+}
+
+.title {
+  text-transform: capitalize;
+}
+.content {
+  max-width: 720px;
 }

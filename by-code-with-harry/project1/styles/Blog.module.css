@@ -12,6 +12,9 @@
 }
 .blogItemh3 {
   cursor: pointer;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
 .blogItemP {
   width: 90%;
