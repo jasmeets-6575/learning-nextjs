@@ -4,17 +4,9 @@ import Link from "next/link";
 
 let url = "http://localhost:3000/api/blogs";
 
-const blog = () => {
-  const [blogs, setBlogs] = useState([]);
-  useEffect(() => {
-    fetch(url)
-      .then((a) => {
-        return a.json();
-      })
-      .then((data) => {
-        setBlogs(data);
-      });
-  }, []);
+const blog = (props) => {
+  const [blogs, setBlogs] = useState();
+  useEffect(() => {}, []);
 
   return (
     <div className={styles.container}>
@@ -35,4 +27,12 @@ const blog = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  let data = await fetch(url);
+  let allBlogs = await data.json(0);
+  return {
+    props: { allBlogs },
+  };
+}
 export default blog;
