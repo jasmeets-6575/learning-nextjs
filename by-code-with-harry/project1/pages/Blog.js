@@ -5,7 +5,7 @@ import Link from "next/link";
 let url = "http://localhost:3000/api/blogs";
 
 const blog = (props) => {
-  const [blogs, setBlogs] = useState();
+  const [blogs, setBlogs] = useState(props.allBlogs);
   useEffect(() => {}, []);
 
   return (
