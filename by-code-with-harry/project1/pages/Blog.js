@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/Blog.module.css";
 import Link from "next/link";
 
@@ -6,7 +6,6 @@ let url = "http://localhost:3000/api/blogs";
 
 const blog = (props) => {
   const [blogs, setBlogs] = useState(props.allBlogs);
-  useEffect(() => {}, []);
 
   return (
     <div className={styles.container}>

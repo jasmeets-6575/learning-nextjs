@@ -1,6 +1,5 @@
-import { useRouter } from "next/router";
 import styles from "../../styles/BlogPost.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 let url = "http://localhost:3000/api/getBlogs?slug=";
 const slug = (props) => {
@@ -19,12 +18,9 @@ const slug = (props) => {
 };
 
 export async function getServerSideProps(context) {
-  // const router = useRouter();
   const { slug } = context.query;
-
   let data = await fetch(`${url}${slug}`);
   let myBlog = await data.json();
-
   return {
     props: { myBlog },
   };
