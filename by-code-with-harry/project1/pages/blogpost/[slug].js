@@ -19,13 +19,17 @@ const slug = (props) => {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: {} }],
+    paths: [
+      { params: { slug: howToLearnFlask } },
+      { params: { slug: howToLearnJavascript } },
+      { params: { slug: howToLearnNextjs } },
+    ],
     fallback: true,
   };
 }
 
 export async function getStaticProps(context) {
-  const { slug } = context.query;
+  const { slug } = context.params;
   let data = await fetch(`${url}${slug}`);
   let myBlog = await data.json();
   return {
