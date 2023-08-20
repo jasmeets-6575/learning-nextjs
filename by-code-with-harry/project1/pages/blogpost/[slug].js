@@ -17,7 +17,14 @@ const slug = (props) => {
   );
 };
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: {} }],
+    fallback: true,
+  };
+}
+
+export async function getStaticProps(context) {
   const { slug } = context.query;
   let data = await fetch(`${url}${slug}`);
   let myBlog = await data.json();
