@@ -1,8 +1,9 @@
 import styles from "../../styles/BlogPost.module.css";
 import { useState } from "react";
+import * as fs from "fs";
 
 let url = "http://localhost:3000/api/getBlogs?slug=";
-const slug = (props) => {
+const Slug = (props) => {
   const [blog, setBlog] = useState(props.myBlog);
 
   return (
@@ -30,11 +31,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { slug } = context.params;
-  let data = await fetch(`${url}${slug}`);
-  let myBlog = await data.json();
+
+  let myBlog = await fs.promises.readFile(`blogdata/${slug}.json`, "utf-8");
   return {
-    props: { myBlog },
+    props: { myBlog: JSON.parse(myBlog) },
   };
 }
 
-export default slug;
+export default Slug;

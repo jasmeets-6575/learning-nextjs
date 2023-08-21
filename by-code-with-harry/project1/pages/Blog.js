@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/Blog.module.css";
 import Link from "next/link";
+import * as fs from "fs";
 
 let url = "http://localhost:3000/api/blogs";
 
@@ -28,8 +29,13 @@ const blog = (props) => {
 };
 
 export async function getStaticProps(context) {
-  let data = await fetch(url);
-  let allBlogs = await data.json(0);
+  let data = await fs.promises.readdir("blogdata");
+  let myFile;
+  let allBlogs = [];
+  data.forEach((item) => {
+    myFile = fs.readFileSync("blogdata/" + item, "utf-8");
+    allBlogs.push(JSON.parse(myFile));
+  });
   return {
     props: { allBlogs },
   };
