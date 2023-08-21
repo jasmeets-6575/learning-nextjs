@@ -21,9 +21,9 @@ const Slug = (props) => {
 export async function getStaticPaths() {
   return {
     paths: [
-      { params: { slug: howToLearnFlask } },
-      { params: { slug: howToLearnJavascript } },
-      { params: { slug: howToLearnNextjs } },
+      { params: { slug: "howToLearnFlask" } },
+      { params: { slug: "howToLearnJavascript" } },
+      { params: { slug: "howToLearnNextjs" } },
     ],
     fallback: true,
   };
@@ -31,8 +31,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { slug } = context.params;
-
   let myBlog = await fs.promises.readFile(`blogdata/${slug}.json`, "utf-8");
+  console.log(`The SLUG IS _ _ ---- ${slug}`);
   return {
     props: { myBlog: JSON.parse(myBlog) },
   };
