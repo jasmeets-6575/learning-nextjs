@@ -2,5 +2,6 @@
   "title": "How to learn Flask",
   "content": "Embarking on Flask Learning: A Comprehensive Path to Mastering Python Web Development Flask, a micro web framework for Python, is an excellent choice for those looking to dive into web development. Whether you're a Python enthusiast or a beginner seeking a versatile and lightweight framework, this guide will take you through a step-by-step process to learn and master Flask effectively. 1. Python Fundamentals Before delving into Flask, ensure you have a solid grasp of Python programming basics: Syntax and Data Types: Familiarize yourself with Python's syntax, variables, data types, and basic operations. Control Flow: Understand conditional statements (if, elif, else) and loops (for, while) to control program flow. Functions and Modules: Master creating functions, using libraries, and organizing code into modules.",
   "author": "John Antonio",
-  "slug": "howToLearnFlask"
+  "slug": "howToLearnFlask",
+  "metadesc": "Learn Flask in Few Minutes , i will teach you flask in few minutes"
 }
