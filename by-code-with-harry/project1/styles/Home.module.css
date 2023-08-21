@@ -4,11 +4,11 @@
 
 .main {
   min-height: 100vh;
-  padding: 2rem 0;
+  padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .title {
-  margin: 0;
+  margin: 0px;
   line-height: 1.15;
   font-size: 4rem;
 }
@@ -51,6 +51,7 @@
 }
 
 .description {
+  margin: 1rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
 }
@@ -130,12 +131,10 @@
 .mainnav ul {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
 }
 
-.mainnav ul li {
-  margin: 0 24px;
-  list-style: none;
+.mainnav li {
+  margin: 0 1.5rem;
   font-weight: bold;
 }
 
@@ -143,6 +142,12 @@
   border-radius: 10px;
 }
 
-.imgWrap {
-  padding: 20px;
+.imgWrapper {
+  margin: 40px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .mainnav ul li {
+    margin: 1rem 0.5rem;
+  }
 }
