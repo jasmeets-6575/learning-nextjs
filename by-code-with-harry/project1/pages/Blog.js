@@ -1,43 +1,66 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/Blog.module.css";
 import Link from "next/link";
 import * as fs from "fs";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-let url = "http://localhost:3000/api/blogs";
-
-const blog = (props) => {
+const Blog = (props) => {
   const [blogs, setBlogs] = useState(props.allBlogs);
+  const [count, setCount] = useState(2);
+
+  const fetchData = async () => {
+    let resp = await fetch(
+      `http://localhost:3000/api/blogs/?count=${count + 2}`
+    );
+    setCount(count + 2);
+    let data = await resp.json();
+
+    setBlogs(data);
+  };
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        {blogs.map((blog, index) => {
-          return (
-            <div key={index}>
-              <Link href={`/blogpost/${blog.slug}`}>
-                <h3 className={styles.blogItemh3}>{blog.title}</h3>
+    <main className={styles.mainBlog}>
+      <div className={styles.blogPostItem}>
+        <InfiniteScroll
+          dataLength={blogs.length}
+          next={fetchData}
+          hasMore={props.allCount !== blogs.length}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {blogs.map((blog, index) => {
+            const { title, metadesc, author, slug } = blog;
+
+            return (
+              <Link href={`/blogpost/${slug}`} key={index}>
+                <h3 className={styles.blogItemh3}>{title}</h3>
+                <p>{metadesc.slice(0, 130)}...</p>
               </Link>
-              <p className={styles.blogItemP}>
-                {blog.metadesc.substr(0, 200)}...
-              </p>
-            </div>
-          );
-        })}
-      </main>
-    </div>
+            );
+          })}
+        </InfiniteScroll>
+      </div>
+    </main>
   );
 };
 
-export async function getStaticProps(context) {
-  let data = await fs.promises.readdir("blogdata");
+export async function getStaticProps() {
+  let data = await fs.promises.readdir("blogData");
+  let allCount = data.length;
   let myFile;
   let allBlogs = [];
-  data.forEach((item) => {
-    myFile = fs.readFileSync("blogdata/" + item, "utf-8");
+  for (let i = 0; i < 2; i++) {
+    const item = data[i];
+    myFile = await fs.promises.readFile("blogdata/" + item, "utf-8");
     allBlogs.push(JSON.parse(myFile));
-  });
+  }
   return {
-    props: { allBlogs },
+    props: { allBlogs, allCount },
   };
 }
-export default blog;
+
+export default Blog;
