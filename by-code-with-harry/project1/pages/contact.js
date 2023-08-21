@@ -1,11 +1,47 @@
+import { useState } from "react";
+import styles from "../styles/Contact.module.css";
+
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [desc, setDesc] = useState("");
 
-  const handleSubmit = async (e) => {};
-  const handleChange = (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = { phone, name, email, desc };
+    fetch("http://localhost:3000/api/postcontact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("Success:", data);
+        alert("Thanks for contacting us");
+        setPhone("");
+        setName("");
+        setDesc("");
+        setEmail("");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  const handleChange = (e) => {
+    if (e.target.name == "name") {
+      setName(e.target.value);
+    } else if (e.target.name == "email") {
+      setEmail(e.target.value);
+    } else if (e.target.name == "phone") {
+      setPhone(e.target.value);
+    } else if (e.target.name == "desc") {
+      setDesc(e.target.value);
+    }
+  };
 
   return (
     <div className={styles.container}>
