@@ -6,12 +6,22 @@ let url = "http://localhost:3000/api/getBlogs?slug=";
 const Slug = (props) => {
   const [blog, setBlog] = useState(props.myBlog);
 
+  function createMarkup() {
+    return { __html: c };
+  }
+
   return (
     <>
-      <div className="container">
+      <div className={styles.container}>
         <main className={styles.main}>
           <h1 className={styles.title}>{blog && blog.title}</h1>
-          <p className={styles.content}>{blog && blog.content}</p>
+
+          {blog && (
+            <div
+              dangerouslySetInnerHTML={createMarkup(blog.content)}
+              className={styles.content}
+            ></div>
+          )}
         </main>
       </div>
     </>
@@ -28,11 +38,9 @@ export async function getStaticPaths() {
     fallback: true,
   };
 }
-
 export async function getStaticProps(context) {
   const { slug } = context.params;
   let myBlog = await fs.promises.readFile(`blogdata/${slug}.json`, "utf-8");
-  console.log(`The SLUG IS _ _ ---- ${slug}`);
   return {
     props: { myBlog: JSON.parse(myBlog) },
   };
