@@ -6,7 +6,7 @@ export default function handler(req, res) {
   } else if (req.method === "POST") {
     const comment = req.body.comment;
     const newComment = {
-      id: Date.now(),
+      id: parseInt(Date.now()),
       text: comment,
     };
     comments.push(newComment);
