@@ -1,4 +1,5 @@
-const Header = () => {
-  return <div>Header</div>;
-};
-export default Header;
+function Footer() {
+  return <div className="footer">Footer</div>;
+}
+
+export default Footer;
