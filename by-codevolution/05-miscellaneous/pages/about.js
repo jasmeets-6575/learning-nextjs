@@ -1,3 +1,4 @@
+import Footer from "@/components/Header";
 import Head from "next/head";
 
 function About() {
@@ -12,4 +13,12 @@ function About() {
   );
 }
 
+About.getLayout = function PageLayout(page) {
+  return (
+    <>
+      {page}
+      <Footer />
+    </>
+  );
+};
 export default About;
