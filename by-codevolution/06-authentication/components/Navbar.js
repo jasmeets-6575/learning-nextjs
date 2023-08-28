@@ -27,12 +27,30 @@ function Navbar() {
 
         {!loading && !session && (
           <li>
-            <Link href="/api/auth/signin">Sign In</Link>
+            <Link href="/api/auth/signin">
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                  signIn("github");
+                }}
+              >
+                Sign In
+              </a>
+            </Link>
           </li>
         )}
         {session && (
           <li>
-            <Link href="/api/auth/signout">Sign Out</Link>
+            <Link href="/api/auth/signout">
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                  signOut();
+                }}
+              >
+                Sign Out
+              </a>
+            </Link>
           </li>
         )}
       </ul>
