@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({});
-  const [subTotal, setsubTotal] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
     try {
@@ -18,8 +18,14 @@ export default function App({ Component, pageProps }) {
     }
   }, []);
 
-  const saveCart = (item) => {
-    localStorage.setItem("cart", item);
+  const saveCart = (myCart) => {
+    localStorage.setItem("cart", myCart);
+    let subt = 0;
+    let keys = Object.keys(cart);
+    for (let i = 0; keys.length; i++) {
+      subt += myCart[keys[i]].price * myCart[keys[i]].qty;
+    }
+    setSubTotal(subt);
   };
   const addToCart = (itemCode, qty, price, name, size, variant) => {
     let newCart = cart;
