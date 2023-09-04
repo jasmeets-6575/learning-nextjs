@@ -19,10 +19,10 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   const saveCart = (myCart) => {
-    localStorage.setItem("cart", myCart);
+    localStorage.setItem("cart", JSON.stringify(myCart));
     let subt = 0;
-    let keys = Object.keys(cart);
-    for (let i = 0; keys.length; i++) {
+    let keys = Object.keys(myCart);
+    for (let i = 0; i < keys.length; i++) {
       subt += myCart[keys[i]].price * myCart[keys[i]].qty;
     }
     setSubTotal(subt);

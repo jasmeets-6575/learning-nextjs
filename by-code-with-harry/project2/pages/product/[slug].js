@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const Post = () => {
+const Post = ({ variants, product, addToCart }) => {
   const router = useRouter();
   const { slug } = router.query;
   const [pin, setPin] = useState();
