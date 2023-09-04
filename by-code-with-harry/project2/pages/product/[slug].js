@@ -1,8 +1,25 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Post = () => {
   const router = useRouter();
   const { slug } = router.query;
+  const [pin, setPin] = useState();
+  const [service, setService] = useState(false);
+
+  const checkServiceability = async () => {
+    let pins = await fetch("http://localhost:3000/api/pincode");
+    let pinJson = await pins.json();
+    if (pinJson.includes(parseInt(pin))) {
+      setService(true);
+    } else {
+      setService(false);
+    }
+  };
+  const onChangePin = (e) => {
+    setPin(e.target.value);
+  };
+
   return (
     <>
       <div className="flex mb-4">
@@ -102,6 +119,30 @@ const Post = () => {
             </svg>
           </a>
         </span>
+        <div className="pin mt-6 flex space-x-2 text-md">
+          <input
+            onChange={onChangePin}
+            type="text"
+            className="border-2 outline-none border-gray-300 rounded-md px-2"
+            placeholder="Enter your Pincode"
+          />
+          <button
+            onClick={checkServiceability}
+            className="flex items-center text-white bg-pink-500 border-0 py-1 px-6 focus:outline-none hover:bg-pink-600 rounded"
+          >
+            Check
+          </button>
+        </div>
+        {!service && service != null && (
+          <div className="text-red-500 mt-2">
+            Sorry! We do not deliver to this pincode
+          </div>
+        )}
+        {service && service != null && (
+          <div className="text-green-500 mt-2">
+            Yay! We deliver to this pincode
+          </div>
+        )}
       </div>
     </>
   );
