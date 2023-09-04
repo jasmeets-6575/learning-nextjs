@@ -1,11 +1,22 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({});
   const [subTotal, setsubTotal] = useState(0);
+
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("cart")) {
+        setCart(JSON.parse(localStorage.getItem("cart")));
+      }
+    } catch (error) {
+      console.log(error);
+      localStorage.clear();
+    }
+  }, []);
 
   const saveCart = (item) => {
     localStorage.setItem("cart", item);
@@ -38,8 +49,20 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Navbar />
-      <Component {...pageProps} />
+      <Navbar
+        cart={cart}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        clearCart={clearCart}
+        subTotal={subTotal}
+      />
+      <Component
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        clearCart={clearCart}
+        subTotal={subTotal}
+        {...pageProps}
+      />
       <Footer />
     </>
   );
