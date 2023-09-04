@@ -11,14 +11,14 @@ import { MdAccountCircle } from "react-icons/md";
 
 const Navbar = () => {
   return (
-    <div className="flex flex-col md:flex-row md:justify-center items-center py-2">
+    <div className="flex flex-col md:flex-row md:justify-center items-center py-2 shadow-md">
       <div className="logo mr-auto md:mx-5">
         <Link href="/">
           <Logo />
         </Link>
       </div>
       <div className="nav mt-1 tracking-wider">
-        <ul className="flex items-center space-x-5 font-bold text-sm md:text-md ">
+        <ul className="flex items-center space-x-6 font-bold text-sm md:text-md ">
           <li className="hover:text-pink-600">
             <Link href="/tshirts">Tshirts</Link>
           </li>
