@@ -1,28 +1,34 @@
-export interface Product {
-  id?: number;
-  product: string;
-  price: string;
-}
+import { addProductToDatabase } from "@/actions/serverActions";
+import { Product } from "@/typings";
 
 export default async function Home() {
-  const res = await fetch("", {
-    cache: "no-cache",
-  });
+  const res = await fetch(
+    "https://648066a0f061e6ec4d493780.mockapi.io/products",
+    {
+      cache: "no-cache",
+      next: {
+        tags: ["products"],
+      },
+    }
+  );
   const products: Product[] = await res.json();
 
   return (
     <main>
       <h1 className="text-3xl font-bold text-center">Products Warehouse</h1>
-      <form action="" className="flex flex-col gap-5 max-w-xl mx-auto p-5">
+      <form
+        action={addProductToDatabase}
+        className="flex flex-col gap-5 max-w-xl mx-auto p-5"
+      >
         <input
           type="text"
-          name=""
+          name="product"
           placeholder="Enter Product name..."
           className="border border-gray-300 rounded-md"
         />
         <input
           type="text"
-          name=""
+          name="price"
           placeholder="Enter Price name..."
           className="border border-gray-300 rounded-md"
         />
