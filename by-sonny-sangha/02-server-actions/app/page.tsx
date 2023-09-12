@@ -1,4 +1,15 @@
-export default function Home() {
+export interface Product {
+  id?: number;
+  product: string;
+  price: string;
+}
+
+export default async function Home() {
+  const res = await fetch("", {
+    cache: "no-cache",
+  });
+  const products: Product[] = await res.json();
+
   return (
     <main>
       <h1 className="text-3xl font-bold text-center">Products Warehouse</h1>
@@ -19,6 +30,16 @@ export default function Home() {
           Add Product
         </button>
       </form>
+
+      <h2 className="font-bold p-5">List of Products</h2>
+      <div className="flex flex-wrap gap-5">
+        {products.map((product) => (
+          <div key={product.id} className="p-5 shadow">
+            <p>{product.product}</p>
+            <p>{product.price}</p>
+          </div>
+        ))}
+      </div>
     </main>
   );
 }
